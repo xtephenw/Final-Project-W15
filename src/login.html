@@ -1,0 +1,122 @@
+ <html>
+<head>
+<script type="text/javascript">
+function slideDown( elem )
+{
+    elem.style.maxHeight = '600px';
+    elem.style.opacity   = '1';
+}
+
+function slideUp( elem )
+{
+    elem.style.maxHeight = '0';
+    once( 1, function ()
+    {
+        elem.style.opacity = '0';
+    } );    
+}
+function AfterDB(text) {
+	document.getElementById("dbase").style.visibility = "visible";
+	document.getElementById("dbase").innerHTML = "Preparer Notes " ;//xmlhttp.responseText; + "test"
+	
+	
+	var h = document.createElement("h1")                // Create a <h1> element
+	var t = document.createTextNode("Preparer Notes");     // Create a text node
+		
+	var para = document.createElement("input");
+	para.setAttribute('type', 'text');
+	para.setAttribute('value', text);
+	para.style.width = "70%";
+	var delbtn = document.createElement("BUTTON");
+	var deltxt = document.createTextNode("Delete Note"); 
+	delbtn.appendChild(deltxt);
+	var updatebtn = document.createElement("BUTTON");
+	var updatetxt = document.createTextNode("Update Note"); 
+	updatebtn.appendChild(updatetxt);
+	var element = document.getElementById("dbase");
+	element.appendChild(h);
+	element.appendChild(updatebtn);
+	element.appendChild(delbtn);
+	element.appendChild(para);
+	para.appendChild(node);
+		
+}
+function showUser(str) {
+    if (str == "") {
+        document.getElementById("dbase").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var action = str; 
+		var username = document.getElementById("username").value; 
+        var password = document.getElementById("password").value; 
+        var firstname = document.getElementById("firstname").value; 
+        var lastname = document.getElementById("lastname").value; 
+        var email = document.getElementById("email").value; 
+
+        var login = document.getElementById("login").value;
+		var params = "username=" + username + "&password=" + password + "&firstname=" + firstname + "&lastname=" + lastname + "&email=" + email + "&action="+action;
+		var url = "service.php";
+		xmlhttp.open("POST",url,true);
+		//Send the proper header information along with the request
+
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//		xmlhttp.setRequestHeader("Content-length", "params.length");
+//		xmlhttp.setRequestHeader("Connection", "close");
+		
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.status == 200) { //xmlhttp.readyState == 4 && 
+                var response = xmlhttp.responseText;
+				AfterDB(response);
+            }
+        }
+        
+		xmlhttp.send(params);
+    }
+}
+</script>
+<link rel="stylesheet" type="text/css" href="finalproj.css">
+</head>
+<body>
+
+<form>
+<div id="container">
+  <div id="message"></div>
+  <form method="post" id="mainform">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" value="" />
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" value="" />
+
+    <input type="button" name="action" id="login" value="Log in" onclick="showUser('login')" />
+
+    <h2>Extra options (registration only)</h2>
+
+    <label for="firstname">First name</label>
+    <input type="text" name="firstname" id = "firstname" value="" />
+
+    <label for="lastname">Last name</label>
+    <input type="text" name="lastname" id = "lastname" value="" />
+
+    <label for="email">Email</label>
+    <input type="text" name="email" id = "email" value="" />
+
+    <input type="button" name="action" id="register" value="Register" onclick="showUser('register')"/>
+  </form>
+  <article id="dbase">  
+  <head>
+ <title></title>
+ </head>
+  </article>
+</div>
+</form>
+
+</body>
+</html>
