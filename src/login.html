@@ -1,20 +1,8 @@
- <html>
+<!DOCTYPE HTML>
+<html>
 <head>
+<link rel="stylesheet" type="text/css" href="finalproj.css">
 <script type="text/javascript">
-function slideDown( elem )
-{
-    elem.style.maxHeight = '600px';
-    elem.style.opacity   = '1';
-}
-
-function slideUp( elem )
-{
-    elem.style.maxHeight = '0';
-    once( 1, function ()
-    {
-        elem.style.opacity = '0';
-    } );    
-}
 function AfterDB(text) {
 	document.getElementById("dbase").style.visibility = "visible";
 	document.getElementById("dbase").innerHTML = "Preparer Notes " ;//xmlhttp.responseText; + "test"
@@ -81,13 +69,18 @@ function showUser(str) {
     }
 }
 </script>
-<link rel="stylesheet" type="text/css" href="finalproj.css">
 </head>
 <body>
-
+	<div id="header">
+	  <div id="logo">
+		<h1>Preparer Notes</h1>
+		<div class="slogan">The Future of Tax Preparation!</div>
+	  </div>
+	</div>  
 <form>
 <div id="container">
   <div id="message"></div>
+   
   <form method="post" id="mainform">
     <label for="username">Username</label>
     <input type="text" name="username" id="username" value="" />
@@ -111,9 +104,6 @@ function showUser(str) {
     <input type="button" name="action" id="register" value="Register" onclick="showUser('register')"/>
   </form>
   <article id="dbase">  
-  <head>
- <title></title>
- </head>
   </article>
 </div>
 </form>
